@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>С Днём рождения, Баба Таня! 🌹</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Шрифт (можешь поменять при желании) -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1b0c12;
+            --bg-card: rgba(29, 10, 18, 0.9);
+            --accent-red: #ff3c5f;
+            --accent-orange: #ff7a3c;
+            --accent-mustard: #f2b35e; /* "горчичный" */
+            --text-main: #fff6f0;
+            --text-muted: #ffd7c2;
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.55);
+            --blur-bg: blur(18px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Comfortaa", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 10% 0%, #3b1024 0, transparent 55%),
+                radial-gradient(circle at 90% 10%, #5b1c12 0, transparent 55%),
+                radial-gradient(circle at 10% 100%, #4a2307 0, transparent 60%),
+                radial-gradient(circle at 90% 100%, #6e1f1b 0, transparent 60%),
+                linear-gradient(135deg, #14040a 0%, #200510 50%, #120308 100%);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .background-roses {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-rose {
+            position: fixed;
+            bottom: -10%;
+            opacity: 0.28;
+            filter: drop-shadow(0 0 10px rgba(255, 144, 144, 0.45));
+            animation-name: floatUp;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-60vh) translateX(20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(-120vh) translateX(-10px) rotate(-10deg);
+            }
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 16px 60px;
+        }
+
+        @media (min-width: 768px) {
+            .page {
+                padding: 40px 20px 80px;
+            }
+        }
+
+        /* Хедер */
+
+        .hero {
+            border-radius: 34px;
+            padding: 28px 22px 30px;
+            background:
+                radial-gradient(circle at 0% 0%, rgba(255, 186, 73, 0.4), transparent 60%),
+                radial-gradient(circle at 100% 0%, rgba(255, 60, 95, 0.45), transparent 60%),
+                linear-gradient(135deg, rgba(27, 4, 13, 0.95), rgba(47, 10, 19, 0.98));
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 190, 130, 0.28);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: var(--blur-bg);
+            animation: fadeInUp 0.7s ease-out;
+        }
+
+        .hero::before {
+            content: "🌹";
+            position: absolute;
+            font-size: 6rem;
+            right: -10px;
+            top: -16px;
+            opacity: 0.1;
+            transform: rotate(18deg);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, rgba(255, 122, 60, 0.2), rgba(242, 179, 94, 0.12));
+            border: 1px solid rgba(255, 197, 140, 0.4);
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .hero-title {
+            font-size: clamp(1.9rem, 3vw + 1rem, 2.8rem);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-red), var(--accent-mustard));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            max-width: 620px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .hero-bottom {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-age-tag {
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 166, 117, 0.55);
+            font-size: 0.86rem;
+        }
+
+        .hero-age-tag strong {
+            color: var(--accent-mustard);
+        }
+
+        /* Общие блоки */
+
+        section {
+            margin-top: 26px;
+            animation: fadeInUp 0.7s ease-out;
+            animation-fill-mode: both;
+        }
+
+        section:nth-of-type(2) { animation-delay: 0.05s; }
+        section:nth-of-type(3) { animation-delay: 0.1s; }
+        section:nth-of-type(4) { animation-delay: 0.15s; }
+        section:nth-of-type(5) { animation-delay: 0.2s; }
+        section:nth-of-type(6) { animation-delay: 0.25s; }
+
+        .card {
+            background: radial-gradient(circle at top left, rgba(255, 122, 60, 0.15), transparent 60%),
+                        radial-gradient(circle at bottom right, rgba(255, 60, 95, 0.12), transparent 55%),
+                        var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 22px 18px 20px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 190, 130, 0.22);
+            backdrop-filter: var(--blur-bg);
+        }
+
+        .section-title {
+            font-size: 1.28rem;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span.badge {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 122, 60, 0.18);
+            border: 1px solid rgba(255, 122, 60, 0.7);
+            color: #ffe3d0;
+        }
+
+        .section-text {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Вступление */
+
+        .intro-highlight {
+            font-weight: 600;
+            color: var(--accent-mustard);
+        }
+
+        /* Галерея */
+
+        .gallery .section-text {
+            margin-bottom: 14px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        @media (min-width: 700px) {
+            .gallery-grid {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 699px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            }
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 197, 140, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 231, 186, 0.9);
+        }
+
+        /* Поздравления от родственников */
+
+        .family-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .family-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 12px;
+            border-radius: var(--radius-md);
+            background: radial-gradient(circle at top left, rgba(255, 122, 60, 0.18), transparent 60%),
+                        rgba(10, 0, 3, 0.75);
+            border: 1px solid rgba(255, 186, 133, 0.5);
+        }
+
+        .family-avatar {
+            flex: 0 0 62px;
+            height: 62px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 198, 140, 0.9);
+            box-shadow: 0 8px 21px rgba(0, 0, 0, 0.7);
+        }
+
+        .family-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .family-text {
+            flex: 1;
+        }
+
+        .family-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+            font-size: 0.98rem;
+        }
+
+        .family-message {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 520px) {
+            .family-card {
+                align-items: flex-start;
+            }
+        }
+
+        /* Мини-игра */
+
+        .game-card {
+            margin-top: 4px;
+        }
+
+        .game-area {
+            margin-top: 12px;
+            position: relative;
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(255, 122, 60, 0.18), transparent 60%),
+                radial-gradient(circle at 90% 100%, rgba(255, 60, 95, 0.18), transparent 60%),
+                rgba(10, 0, 3, 0.9);
+            border: 1px dashed rgba(255, 186, 133, 0.7);
+            height: 260px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .game-area-hint {
+            position: absolute;
+            left: 50%;
+            top: 14px;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: rgba(255, 230, 214, 0.82);
+            padding: 4px 10px;
+            background: rgba(37, 8, 12, 0.9);
+            border-radius: 999px;
+            border: 1px solid rgba(255, 186, 133, 0.6);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .game-rose {
+            position: absolute;
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(255, 80, 80, 0.85);
+            animation-name: gameRoseMove;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .game-rose.collected {
+            animation: collectedPop 0.32s ease forwards;
+            pointer-events: none;
+        }
+
+        @keyframes gameRoseMove {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            25% {
+                transform: translate3d(-40px, 40px, 0) scale(1.08);
+            }
+            50% {
+                transform: translate3d(36px, 55px, 0) scale(0.96);
+            }
+            75% {
+                transform: translate3d(-25px, -30px, 0) scale(1.04);
+            }
+            100% {
+                transform: translate3d(20px, -50px, 0) scale(1.02);
+            }
+        }
+
+        @keyframes collectedPop {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            40% {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .game-status {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .game-status span {
+            color: var(--accent-mustard);
+            font-weight: 600;
+        }
+
+        .game-message {
+            margin-top: 10px;
+            font-size: 1.02rem;
+            font-weight: 600;
+            padding: 10px 12px;
+            border-radius: 16px;
+            background: linear-gradient(90deg, rgba(255, 122, 60, 0.28), rgba(255, 60, 95, 0.28));
+            color: #fff6f0;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9) translateY(8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .game-message.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Видео-подарок */
+
+        .video-wrapper {
+            margin-top: 12px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 190, 130, 0.65);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .video-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.2), transparent 60%);
+            pointer-events: none;
+            mix-blend-mode: soft-light;
+        }
+
+        video {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #000;
+        }
+
+        .video-caption-top {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .video-caption-top strong {
+            color: var(--accent-mustard);
+        }
+
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 0.82rem;
+            color: rgba(255, 210, 193, 0.7);
+        }
+
+        footer span {
+            color: var(--accent-orange);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="background-roses"></div>
+
+<div class="page">
+    <!-- Хедер -->
+    <header class="hero">
+        <div class="hero-badge">
+            🌹 С Днём рождения, любимая бабушка!
+        </div>
+        <h1 class="hero-title">
+            <span>Баба Таня, 63 года!</span> 💖
+        </h1>
+        <p class="hero-subtitle">
+            Это не старость — это золотой возраст, когда у мудрости есть мягкая улыбка, 
+            у заботы — тёплые руки, а у любви — твоё доброе сердце. Спасибо, что ты есть у нас. 💫
+        </p>
+
+        <div class="hero-bottom">
+            <div class="hero-age-tag">
+                <strong>63</strong> — это тысячи историй, сотни объятий и бесконечная любовь семьи.
+            </div>
+            <div class="hero-age-tag">
+                Сегодня весь мир немного лучше, потому что сегодня твой день. ✨
+            </div>
+        </div>
+    </header>
+
+    <!-- Блок с общим поздравлением -->
+    <section>
+        <div class="card">
+            <h2 class="section-title">
+                От всей семьи с любовью 💌
+                <span class="badge">Главное поздравление</span>
+            </h2>
+            <p class="section-text">
+                Дорогая <span class="intro-highlight">Баба Таня</span>! 💕<br><br>
+                63 года — это время, когда можно чуть-чуть притормозить, 
+                налить себе вкусный чай, укрыться пледом и с улыбкой 
+                смотреть на всё, что ты уже успела сделать в этой жизни. А сделала ты очень много:
+                вырастила детей, даришь тепло внукам, поддерживаешь, когда тяжело, и всегда находишь слова,
+                которые лечат сердце. 💫<br><br>
+                Мы безумно благодарны тебе за каждый вкусный пирог, 
+                за каждый мудрый совет, за каждую минуту, когда ты просто рядом. 
+                Пусть здоровье будет крепким, как твой характер, настроение — солнечным, как яркий летний день, 
+                а дом всегда полон смеха, света и ароматов твоей домашней магии. 🧡<br><br>
+                Мы тебя очень любим. Пусть впереди будет ещё много счастливых лет, 
+                путешествий, семейных праздников и маленьких радостей, которые делают жизнь такой тёплой. 🌟
+            </p>
+        </div>
+    </section>
+
+    <!-- Галерея фотографий -->
+    <section class="gallery">
+        <div class="card">
+            <h2 class="section-title">
+                Фотоистория Бабы Тани 📸
+                <span class="badge">5 любимых моментов</span>
+            </h2>
+            <p class="section-text">
+                Здесь всего несколько кадров, но за каждым — целый мир: улыбки, праздники, 
+                тихие вечера и большие семейные воспоминания. Пусть эти моменты живут не только в альбомах,
+                но и в наших сердцах. ❤️
+            </p>
+
+            <div class="gallery-grid">
+                <img src="BabaTanya1.png" alt="Баба Таня — фото 1">
+                <img src="BabaTanya2.png" alt="Баба Таня — фото 2">
+                <img src="BabaTanya3.png" alt="Баба Таня — фото 3">
+                <img src="BabaTanya4.png" alt="Баба Таня — фото 4">
+                <img src="BabaTanya5.png" alt="Баба Таня — фото 5">
+            </div>
+        </div>
+    </section>
+
+    <!-- Поздравления от родственников -->
+    <section>
+        <div class="card">
+            <h2 class="section-title">
+                Поздравления от родных 👨‍👩‍👧‍👦
+                <span class="badge">Наши слова для тебя</span>
+            </h2>
+
+            <div class="family-grid">
+                <!-- Emily -->
+                <article class="family-card">
+                    <div class="family-avatar">
+                        <img src="Emily.png" alt="Emily">
+                    </div>
+                    <div class="family-text">
+                        <div class="family-name">Emily 💕</div>
+                        <div class="family-message">
+                            Агу! Агу! Агу!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Demid -->
+                <article class="family-card">
+                    <div class="family-avatar">
+                        <img src="Demid.png" alt="Demid">
+                    </div>
+                    <div class="family-text">
+                        <div class="family-name">Demid ⚽</div>
+                        <div class="family-message">
+                            Баба Таня, с днем рождения! Желаю всегда оставаться такой доброй, и что бы люсик не бесил!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Me -->
+                <article class="family-card">
+                    <div class="family-avatar">
+                        <img src="Me.png" alt="Я">
+                    </div>
+                    <div class="family-text">
+                        <div class="family-name">Я, твой внук 💖</div>
+                        <div class="family-message">
+                         Баба Таня, с днем рождения! Желаю тебе крепкого здоровья, безграничного счастья и что бы всегда разрешала оставаться у тебя на ночовке! И что бы пекла нам пирожки!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Nadya -->
+                <article class="family-card">
+                    <div class="family-avatar">
+                        <img src="Nadya.png" alt="Nadya">
+                    </div>
+                    <div class="family-text">
+                        <div class="family-name">Nadya 🌸</div>
+                        <div class="family-message">
+                          Дорогая Мама, с днём рождения! Ты самая лучшая мама! Я тебя люблю!
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Lusien -->
+                <article class="family-card">
+                    <div class="family-avatar">
+                        <img src="Lusien.png" alt="Lusien">
+                    </div>
+                    <div class="family-text">
+                        <div class="family-name">Lusien 🌷</div>
+                        <div class="family-message">
+                           Мяу, Мяу! С днём рождения, Баба Таня! Я твой кот!
+                        </div>
+                    </div>
+                </article>
+    </section>
+
+    <!-- Мини-игра с розами -->
+    <section>
+        <div class="card game-card">
+            <h2 class="section-title">
+                Мини-игра для Бабы Тани 🎮
+                <span class="badge">Поймай все розы</span>
+            </h2>
+            <p class="section-text">
+                В этой волшебной открытке спрятались летающие розы. Нажми по каждой, чтобы собрать их все.
+                Когда соберёшь <strong>5 роз</strong>, появится маленький сюрприз. 🌹✨
+            </p>
+
+            <div class="game-area" id="game-area">
+                <div class="game-area-hint">Нажимай на розы внутри карточки 🌹</div>
+
+                <!-- 5 роз в мини-игре -->
+                <div class="game-rose" data-id="1" style="top: 26%; left: 16%; animation-duration: 9s; animation-delay: 0s;">
+                    🌹
+                </div>
+                <div class="game-rose" data-id="2" style="top: 55%; left: 68%; animation-duration: 11s; animation-delay: 0.8s;">
+                    🌹
+                </div>
+                <div class="game-rose" data-id="3" style="top: 18%; left: 70%; animation-duration: 10s; animation-delay: 0.3s;">
+                    🌹
+                </div>
+                <div class="game-rose" data-id="4" style="top: 66%; left: 28%; animation-duration: 12s; animation-delay: 1.2s;">
+                    🌹
+                </div>
+                <div class="game-rose" data-id="5" style="top: 40%; left: 44%; animation-duration: 9.5s; animation-delay: 0.6s;">
+                    🌹
+                </div>
+            </div>
+
+            <div class="game-status">
+                Собрано роз: <span id="rose-count">0</span>/5
+            </div>
+            <div class="game-message" id="game-message">
+                Поздравляю, ты выиграла! 🎉🌹<br>
+                Пусть удача, радость и любовь всегда прилетают к тебе так же легко, как эти розы.
+            </div>
+        </div>
+    </section>
+
+    <!-- Видео-подарок -->
+    <section>
+        <div class="card">
+            <h2 class="section-title">
+                Наш дополнительный подарок 🎁
+                <span class="badge">Видео-воспоминания</span>
+            </h2>
+            <p class="video-caption-top">
+                <strong>Так же наш дополнительный подарок с мамой:</strong><br>
+                Я оживил твои старые фотографии — наслаждайся этими тёплыми моментами, 
+                которые теперь заиграли по-новому. 🙂
+            </p>
+
+            <div class="video-wrapper">
+                <video src="Photos.mp4" controls></video>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Сделано с огромной любовью специально для тебя, <span>Баба Таня</span> 💝
+    </footer>
+</div>
+
+<script>
+    // Фоновые розы по всему сайту
+    document.addEventListener("DOMContentLoaded", () => {
+        const bgContainer = document.querySelector(".background-roses");
+        const roseCount = 18; // количество роз на фоне
+
+        for (let i = 0; i < roseCount; i++) {
+            const span = document.createElement("span");
+            span.classList.add("bg-rose");
+            span.textContent = "🌹";
+
+            const left = Math.random() * 100;
+            const duration = 22 + Math.random() * 24;
+            const delay = -Math.random() * 40;
+            const size = 18 + Math.random() * 18;
+
+            span.style.left = left + "%";
+            span.style.animationDuration = duration + "s";
+            span.style.animationDelay = delay + "s";
+            span.style.fontSize = size + "px";
+
+            bgContainer.appendChild(span);
+        }
+
+        initRoseGame();
+    });
+
+    // Логика мини-игры
+    function initRoseGame() {
+        const roses = document.querySelectorAll(".game-rose");
+        const counterEl = document.getElementById("rose-count");
+        const messageEl = document.getElementById("game-message");
+
+        let collected = 0;
+
+        roses.forEach(rose => {
+            rose.addEventListener("click", (event) => {
+                event.stopPropagation();
+
+                if (rose.classList.contains("collected")) return;
+
+                rose.classList.add("collected");
+                collected++;
+                counterEl.textContent = collected;
+
+                if (collected >= roses.length) {
+                    messageEl.classList.add("show");
+                    // Немного "тряски" карточке при победе
+                    const card = messageEl.closest(".card");
+                    if (card) {
+                        card.animate([
+                            { transform: "translateX(0)" },
+                            { transform: "translateX(-4px)" },
+                            { transform: "translateX(4px)" },
+                            { transform: "translateX(-2px)" },
+                            { transform: "translateX(2px)" },
+                            { transform: "translateX(0)" }
+                        ], {
+                            duration: 450,
+                            easing: "ease-out"
+                        });
+                    }
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>
